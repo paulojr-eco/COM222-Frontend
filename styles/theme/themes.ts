@@ -21,8 +21,12 @@ const darkTheme: ThemeOptions = {
   typography: {
     fontFamily: "Poppins",
     h1: {
-      fontSize: '1.5rem',
-    }
+      fontSize: "1.5rem",
+    },
+    h2: {
+      fontSize: "1.5rem",
+      fontWeight: 600,
+    },
   },
 };
 

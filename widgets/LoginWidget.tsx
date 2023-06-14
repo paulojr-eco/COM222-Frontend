@@ -1,7 +1,6 @@
 import {
   Box,
   Typography,
-  Divider,
   TextField,
   Switch,
   Button,
@@ -11,6 +10,7 @@ import * as React from "react";
 
 const LoginWidget: React.FC = () => {
   return (
+
     <Box
       className="flex flex-col p-4 space-y-4"
     >
