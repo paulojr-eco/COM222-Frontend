@@ -1,32 +1,17 @@
-import {
-  Box,
-  Typography,
-  TextField,
-  Switch,
-  Button,
-} from "@mui/material";
+import { Box, Typography, TextField, Switch, Button } from "@mui/material";
 import { Lock } from "@mui/icons-material";
 import * as React from "react";
 
 const LoginWidget: React.FC = () => {
   return (
-
-    <Box
-      className="flex flex-col p-4 space-y-4"
-    >
-      <TextField label="Email" variant="outlined" required size="small" />
-      <TextField
-        label="Senha"
-        variant="outlined"
-        required
-        size="small"
-        type="password"
-      />
+    <Box className="flex flex-col p-4 space-y-4">
+      <TextField label="Email" variant="outlined" required />
+      <TextField label="Senha" variant="outlined" required type="password" />
       <div className="flex flex-row justify-center">
         <Switch defaultChecked size="small" className="mr-4" />
         <Typography> Manter-me conectado </Typography>
       </div>
-      <Button variant="contained" color="primary">
+      <Button variant="contained" color="primary" size="large">
         Login
       </Button>
       <div className="flex flex-row justify-center">

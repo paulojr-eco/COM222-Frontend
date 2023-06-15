@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Tabs, Tab, Typography, Box } from "@mui/material";
-import LoginWidget from "@/widgets/LoginWidget";
+import LoginWidget from "./LoginWidget";
 import SiginWidget from "./SiginWidget";
 
 interface TabPanelProps {
