@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Box, InputAdornment, TextField, Typography } from "@mui/material";
-import UserCard from "@/widgets/users/UserCard";
-import { UserModel } from "@/models/user.model";
+import UserCard from "@/components/widgets/users/UserCard";
+import { UserModel } from "@/models/student.model";
 import { Search } from "@mui/icons-material";
 import ActionButton from "./ActionButton";
 import AddIcon from "@mui/icons-material/Add";
@@ -45,6 +45,19 @@ const CustomPage: React.FC<CustomPageProps> = ({
       </Box>
       <Box
         className="flex flex-col rounded-b-2xl md:rounded-tr-2xl p-6 md:p-14 min-h-screen md:min-h-full items-center overflow-y-scroll shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]"
+        sx={{
+          "&::-webkit-scrollbar": {
+            width: "0.4em",
+          },
+          "&::-webkit-scrollbar-track": {
+            boxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
+            webkitBoxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
+          },
+          "&::-webkit-scrollbar-thumb": {
+            backgroundColor: "rgba(0,0,0,.1)",
+            outline: "1px solid slategrey",
+          },
+        }}
         bgcolor="background.paper"
       >
         {hasSearch && (
@@ -64,7 +77,7 @@ const CustomPage: React.FC<CustomPageProps> = ({
         )}
         <div className="grid grid-cols-1 md:grid-cols-4 pt-12 mx-auto gap-x-6 gap-y-14">
           {filteredUsers.map((user) => (
-            <UserCard user={user} />
+            <UserCard key={user.id} user={user} />
           ))}
         </div>
       </Box>

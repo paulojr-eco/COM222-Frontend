@@ -1,7 +1,7 @@
 import * as React from "react";
 import loginImage from "../assets/images/login-img.png";
 import Header from "../components/Header";
-import LoginTabPanel from "../widgets/login/LoginTabPanel";
+import LoginTabPanel from "../components/widgets/login/LoginTabPanel";
 
 export default function index() {
   return (

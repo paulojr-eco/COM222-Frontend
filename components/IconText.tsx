@@ -12,7 +12,7 @@ const IconText: React.FC<IconTextProps> = ({ text, Icon, color }) => {
   return (
     <div className="flex flex-row gap-x-4">
       <Icon sx={{ color: color }} />
-      <Typography>{text}</Typography>
+      <Typography noWrap>{text}</Typography>
     </div>
   );
 };
