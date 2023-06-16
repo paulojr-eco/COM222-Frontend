@@ -1,7 +1,7 @@
 import * as React from "react";
 import createImage from "../../assets/images/create-resource.png";
 import Header from "@/components/Header";
-import CreateStudentWidget from "@/widgets/users/CreateStudentWidget";
+import CreateStudentWidget from "@/components/widgets/users/CreateStudentWidget";
 
 export default function index() {
   return (

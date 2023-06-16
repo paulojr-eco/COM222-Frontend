@@ -13,6 +13,9 @@ const darkTheme: ThemeOptions = {
     success: {
       main: "#34C38F",
     },
+    error: {
+      main: "#FF3B3B",
+    },
     background: {
       default: "#636185",
       paper: "#35344F",
@@ -37,6 +40,23 @@ const darkTheme: ThemeOptions = {
     h3: {
       fontSize: "1.1rem",
       fontWeight: 600,
+    },
+  },
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        '@global': {
+          '*::-webkit-scrollbar': {
+            width: '0.5em',
+          },
+          '*::-webkit-scrollbar-track': {
+            background: '#f1f1f1',
+          },
+          '*::-webkit-scrollbar-thumb': {
+            background: '#888',
+          },
+        },
+      },
     },
   },
 };
