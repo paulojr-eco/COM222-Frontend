@@ -1,5 +1,4 @@
-import axios from "axios";
-import { baseUrl } from "./base.service";
+import api from "./api.service";
 import { RequestStudentInterface } from "@/models/interfaces/req.student.interface";
 import { parseCookies } from "nookies";
 import { UUID } from "crypto";
@@ -8,7 +7,7 @@ export const getAllStudents = async (
   accessToken: string
 ): Promise<Map<string, any> | null> => {
   try {
-    const response = await axios.get(`${baseUrl}/alunos`, {
+    const response = await api.get(`/alunos`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
@@ -25,7 +24,7 @@ export const getStudentById = async (
   userId: string
 ): Promise<Map<string, any> | null> => {
   try {
-    const response = await axios.get(`${baseUrl}/alunos/${userId}`, {
+    const response = await api.get(`/alunos/${userId}`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
@@ -40,7 +39,7 @@ export const getStudentById = async (
 export const createStudent = async (newStudent: RequestStudentInterface) => {
   try {
     const cookies = parseCookies();
-    const response = await axios.post(`${baseUrl}/alunos`, newStudent, {
+    const response = await api.post(`/alunos`, newStudent, {
       headers: {
         Authorization: `Bearer ${cookies.accessToken}`,
       },
@@ -55,7 +54,7 @@ export const createStudent = async (newStudent: RequestStudentInterface) => {
 export const deleteStudent = async (userId: UUID) => {
   try {
     const cookies = parseCookies();
-    const response = await axios.delete(`${baseUrl}/alunos/${userId}`, {
+    const response = await api.delete(`/alunos/${userId}`, {
       headers: {
         Authorization: `Bearer ${cookies.accessToken}`,
       },
@@ -67,10 +66,13 @@ export const deleteStudent = async (userId: UUID) => {
   }
 };
 
-export const editStudent = async (userId: UUID, student: RequestStudentInterface) => {
+export const editStudent = async (
+  userId: UUID,
+  student: RequestStudentInterface
+) => {
   try {
     const cookies = parseCookies();
-    const response = await axios.put(`${baseUrl}/alunos/${userId}`, student, {
+    const response = await api.put(`/alunos/${userId}`, student, {
       headers: {
         Authorization: `Bearer ${cookies.accessToken}`,
       },

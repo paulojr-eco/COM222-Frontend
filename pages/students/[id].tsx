@@ -17,6 +17,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id } = query;
   const cookies = parseCookies(context);
   const user = await getStudentById(cookies.accessToken, String(id));
+  if (typeof user === "object" && user !== null) {
+    for (const [key] of Object.entries(user)) {
+      if (key === "redirect") {
+        return { redirect: { destination: "/login", permanent: false } };
+      }
+    }
+  }
 
   return {
     props: {

@@ -4,9 +4,12 @@ import { loginUser } from "@/services/login.service";
 import * as React from "react";
 import AlertDialog from "@/components/AlertDialog";
 import { useRouter } from "next/router";
+import Link from "next/link";
+import addEventDestroyCookies from "@/utility/destroyCookiesEvent";
 
 const LoginWidget: React.FC = () => {
   const router = useRouter();
+  const [keepSigned, setKeepSigned] = React.useState(true);
   const [user, setUser] = React.useState({
     email: "",
     password: "",
@@ -15,6 +18,9 @@ const LoginWidget: React.FC = () => {
   const [openAlertDialog, setOpenAlertDialog] = React.useState(false);
 
   const handleLogin = async () => {
+    if (!keepSigned) {
+      addEventDestroyCookies();
+    }
     const hasSuccsess = await loginUser(user);
     if (!hasSuccsess) {
       setOpenAlertDialog(true);
@@ -53,7 +59,15 @@ const LoginWidget: React.FC = () => {
         onChange={(e) => setUser({ ...user, password: e.target.value })}
       />
       <div className="flex flex-row justify-center">
-        <Switch defaultChecked size="small" className="mr-4" />
+        <Switch
+          value={keepSigned}
+          defaultChecked
+          size="small"
+          className="mr-4"
+          onChange={() => {
+            setKeepSigned(!keepSigned);
+          }}
+        />
         <Typography> Manter-me conectado </Typography>
       </div>
       <Button
@@ -64,10 +78,12 @@ const LoginWidget: React.FC = () => {
       >
         Login
       </Button>
-      <div className="flex flex-row justify-center">
-        <Lock color="primary" className="mr-4" />
-        <Typography> Esqueceu sua senha? </Typography>
-      </div>
+      <Link href="/reset-password" className="w-[100%]">
+        <div className="flex flex-row justify-center text-white">
+          <Lock color="primary" className="mr-4" />
+          <Typography> Esqueceu sua senha? </Typography>
+        </div>
+      </Link>
       <AlertDialog
         open={openAlertDialog}
         title={"Algo deu errado..."}

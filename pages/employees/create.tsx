@@ -3,6 +3,12 @@ import createImage from "../../assets/images/create-resource.png";
 import Header from "@/components/Header";
 import SideMenuBar from "@/components/SideMenuBar";
 import CrudEmployeeWidget from "@/components/widgets/users/CrudEmployeeWidget";
+import { GetServerSideProps } from "next";
+import checkAuth from "@/utility/checkAuth";
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  return checkAuth(context);
+};
 
 export default function index() {
   return (

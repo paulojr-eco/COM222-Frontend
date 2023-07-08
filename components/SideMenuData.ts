@@ -37,7 +37,7 @@ export const SidebarFixedData = [
   },
   {
     title: "Nome Sobrenome",
-    path: "/home",
+    path: "/profile",
     icon: defaultAvatar,
   },
 ];
