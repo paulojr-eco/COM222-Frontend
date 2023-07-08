@@ -1,7 +1,7 @@
 import * as React from "react";
-import { Tabs, Tab, Typography, Box } from "@mui/material";
+import { Tabs, Tab, Box } from "@mui/material";
 import LoginWidget from "./LoginWidget";
-import SiginWidget from "./SiginWidget";
+import SiginWidget from "./SignupWidget";
 
 interface TabPanelProps {
   children?: React.ReactNode;
