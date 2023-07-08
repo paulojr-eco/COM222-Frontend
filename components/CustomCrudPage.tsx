@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Box, InputAdornment, TextField, Typography } from "@mui/material";
 import UserCard from "@/components/widgets/users/UserCard";
-import { UserModel } from "@/models/student.model";
+import { StudentModel } from "@/models/student.model";
 import { Search } from "@mui/icons-material";
 import ActionButton from "./ActionButton";
 import AddIcon from "@mui/icons-material/Add";
@@ -11,10 +11,10 @@ interface CustomPageProps {
   title: string;
   hasSearch?: boolean;
   crudName?: string;
-  users: Array<UserModel>;
+  users: Array<StudentModel>;
 }
 
-const CustomPage: React.FC<CustomPageProps> = ({
+const CustomCrudPage: React.FC<CustomPageProps> = ({
   title,
   hasSearch,
   users,
@@ -34,7 +34,7 @@ const CustomPage: React.FC<CustomPageProps> = ({
   };
 
   return (
-    <div className="flex flex-col justify-center md:h-[90vh] md:w-[90vw]">
+    <div className="flex flex-col justify-center md:h-[90vh] md:w-[80vw]">
       <Box
         className="max-w-sm md:max-w-xs p-3 rounded-t-xl"
         bgcolor="primary.main"
@@ -75,13 +75,13 @@ const CustomPage: React.FC<CustomPageProps> = ({
             }}
           />
         )}
-        <div className="grid grid-cols-1 md:grid-cols-4 pt-12 mx-auto gap-x-6 gap-y-14">
+        <div className="grid grid-cols-1 md:grid-cols-4 pt-12 gap-x-6 gap-y-14">
           {filteredUsers.map((user) => (
             <UserCard key={user.id} user={user} />
           ))}
         </div>
       </Box>
-      <div className="fixed bottom-2 right-2 md:bottom-[6vh] md: md:right-[8vw]">
+      <div className="fixed bottom-2 right-2 md:bottom-[4vh] md:right-[2vw]">
         <ActionButton
           Icon={AddIcon}
           isLarge={true}
@@ -93,4 +93,4 @@ const CustomPage: React.FC<CustomPageProps> = ({
   );
 };
 
-export default CustomPage;
+export default CustomCrudPage;

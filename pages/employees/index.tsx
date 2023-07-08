@@ -1,10 +1,10 @@
 import * as React from "react";
 import CustomPage from "../../components/CustomCrudPage";
-import { StudentModel } from "@/models/student.model";
-import { getAllStudents } from "@/services/students.service";
 import { GetServerSideProps } from "next";
 import { parseCookies } from "nookies";
 import SideMenuBar from "@/components/SideMenuBar";
+import { getAllEmployees } from "@/services/employees.service";
+import { EmployeeModel } from "@/models/employee.model";
 
 interface PageProps {
   users: any;
@@ -12,7 +12,7 @@ interface PageProps {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const cookies = parseCookies(context);
-  const users = await getAllStudents(cookies.accessToken);
+  const users = await getAllEmployees(cookies.accessToken);
   return {
     props: {
       users,
@@ -22,15 +22,15 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
 const Index: React.FC<PageProps> = ({ users }) => {
   const listUsers = users.map((user: Map<string, any>) =>
-    StudentModel.newUserFromMap(user)
+    EmployeeModel.newUserFromMap(user)
   );
   return (
     <div className="flex flex-row items-center md:h-screen md:w-screen">
       <SideMenuBar />
       <div className="mx-auto">
         <CustomPage
-          title={"Alunos"}
-          crudName="students"
+          title={"Funcionários"}
+          crudName="employees"
           hasSearch={true}
           users={listUsers}
         />

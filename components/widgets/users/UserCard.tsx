@@ -11,6 +11,8 @@ import Image from "next/image";
 import defaultAvatar from "../../../assets/images/default-avatar.png";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import MenuDropDown from "@/components/MenuDropDown";
+import { deleteStudent } from "@/services/students.service";
+import { deleteEmployee } from "@/services/employees.service";
 
 interface UserCardProps {
   user: StudentModel;
@@ -36,6 +38,10 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
             icon={MoreVertIcon}
             isStudent={user.role === "Aluno" ? true : false}
             userName={user.name}
+            userId={user.id}
+            handleDelete={
+              user.role === "Aluno" ? deleteStudent : deleteEmployee
+            }
           />
         </div>
       </div>

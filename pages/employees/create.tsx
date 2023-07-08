@@ -1,8 +1,8 @@
 import * as React from "react";
 import createImage from "../../assets/images/create-resource.png";
 import Header from "@/components/Header";
-import CreateStudentWidget from "@/components/widgets/users/CrudStudentWidget";
 import SideMenuBar from "@/components/SideMenuBar";
+import CrudEmployeeWidget from "@/components/widgets/users/CrudEmployeeWidget";
 
 export default function index() {
   return (
@@ -10,11 +10,11 @@ export default function index() {
       <SideMenuBar />
       <div className="flex flex-col mx-auto md:w-1/2">
         <Header
-          title={"Cadastrar novo Aluno"}
+          title={"Cadastrar novo Funcionário"}
           description={"Preencha os dados abaixo"}
           imagePath={createImage}
         />
-        <CreateStudentWidget />
+        <CrudEmployeeWidget />
       </div>
     </div>
   );
