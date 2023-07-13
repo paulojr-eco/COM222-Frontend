@@ -1,5 +1,12 @@
 # School-Management-Frontend
 
+<p align="center">
+  <a href="#star-features">Features</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  <a href="#keyboard-tecnologias">Tecnologias</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  <a href="#computer_mouse-instalação">Instalação</a>
+</p>
+
+
 # :star: Features
 
 Esta é uma página Web para um aplicativo de gerenciamento escolar.
@@ -21,7 +28,7 @@ O aplicativo é construído utilizando o framework React.JS com Next.JS. Toda es
 
 <br/>
 
-# :keyboard: Technologies
+# :keyboard: Tecnologias
 
 As tecnologias utilizadas no projeto foram:
 
@@ -34,7 +41,7 @@ As tecnologias utilizadas no projeto foram:
 
 <br/>
 
-# :computer_mouse: Installation
+# :computer_mouse: Instalação
 
 Para usar este projeto, primeiro você precisa de Node.JS, React.JS, e Next.JS instalados:
 
