@@ -33,3 +33,20 @@ As tecnologias utilizadas no projeto foram:
 - [x] Typescript    
 
 <br/>
+
+# :computer_mouse: Installation
+
+Para usar este projeto, primeiro você precisa de Node.JS, React.JS, e Next.JS instalados:
+
+```bash
+# Clonar o repositório
+git clone https://github.com/paulojr-eco/COM222-Frontend.git
+
+# Acessar o diretório
+cd COM222-Frontend
+
+# Instalar dependências
+npm install
+
+# Iniciar a aplicação 
+npm run dev
