@@ -1,6 +1,10 @@
 # School-Management-Frontend
 
 <p align="center">
+  <img alt="logo" src="https://github.com/paulojr-eco/COM222-Backend/blob/main/.github/logo.png?raw=true" width="25%">
+</p>
+
+<p align="center">
   <a href="#star-features">Features</a>&nbsp;&nbsp;|&nbsp;&nbsp;
   <a href="#keyboard-tecnologias">Tecnologias</a>&nbsp;&nbsp;|&nbsp;&nbsp;
   <a href="#computer_mouse-instalação">Instalação</a>
