@@ -60,6 +60,7 @@ const SignupWidget: React.FC = () => {
         helperText={invalidEmail ? "Formato de e-mail inválido" : ""}
         label="Email"
         variant="outlined"
+        id="email-input"
         required
         onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
         onKeyDown={(e) => {
@@ -73,6 +74,7 @@ const SignupWidget: React.FC = () => {
         helperText={invalidPassword ? "As senhas não correspondem." : ""}
         label="Senha"
         variant="outlined"
+        id="password-input"
         required
         type="password"
         onChange={(e) => setNewUser({ ...newUser, password: e.target.value })}
@@ -87,6 +89,7 @@ const SignupWidget: React.FC = () => {
         helperText={invalidPassword ? "As senhas não correspondem." : ""}
         label="Confirme sua Senha"
         variant="outlined"
+        id="password-confirm-input"
         required
         type="password"
         onChange={(e) =>
@@ -102,13 +105,14 @@ const SignupWidget: React.FC = () => {
         variant="contained"
         color="primary"
         size="large"
+        id="signup-btn"
         onClick={handleSignup}
       >
-        Sigin
+        SignUp
       </Button>
       <AlertDialog
         open={openAlertDialog}
-        title={hasSuccsess ? "Conta criado com sucesso!" : "Algo deu Errado..."}
+        title={hasSuccsess ? "Conta criada com sucesso!" : "Algo deu Errado..."}
         text={
           hasSuccsess
             ? "Realize o Login para acessar o Portal."

@@ -38,6 +38,7 @@ const LoginWidget: React.FC = () => {
       <TextField
         label="Email"
         variant="outlined"
+        id="email-input"
         required
         onKeyDown={(e) => {
           if (e.key === "Enter") {
@@ -49,6 +50,7 @@ const LoginWidget: React.FC = () => {
       <TextField
         label="Senha"
         variant="outlined"
+        id="password-input"
         required
         type="password"
         onKeyDown={(e) => {
@@ -62,6 +64,7 @@ const LoginWidget: React.FC = () => {
         <Switch
           value={keepSigned}
           defaultChecked
+          id="keep-conect-toggle"
           size="small"
           className="mr-4"
           onChange={() => {
@@ -74,11 +77,16 @@ const LoginWidget: React.FC = () => {
         variant="contained"
         color="primary"
         size="large"
+        id="login-btn"
         onClick={handleLogin}
       >
         Login
       </Button>
-      <Link href="/reset-password" className="w-[100%]">
+      <Link
+        href="/reset-password"
+        className="w-[100%]"
+        id="forget-password-link"
+      >
         <div className="flex flex-row justify-center text-white">
           <Lock color="primary" className="mr-4" />
           <Typography> Esqueceu sua senha? </Typography>

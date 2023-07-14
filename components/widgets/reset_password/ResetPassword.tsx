@@ -15,7 +15,8 @@ const ResetPassword: React.FC = () => {
   const [openAlertDialog, setOpenAlertDialog] = React.useState(false);
 
   const handleConfirmation = async () => {
-    /*const hasSuccsess = await sendEmailRequest(email);
+    /* TO DO
+    const hasSuccsess = await sendEmailRequest(email);
     if (!hasSuccsess) {
       setOpenAlertDialog(true);
     } else {

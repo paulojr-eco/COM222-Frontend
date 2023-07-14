@@ -2,11 +2,12 @@ import * as React from "react";
 import createImage from "../../assets/images/create-resource.png";
 import Header from "@/components/Header";
 import CrudStudentWidget from "@/components/widgets/users/CrudStudentWidget";
-import SideMenuBar from "@/components/SideMenuBar";
 import { GetServerSideProps } from "next";
 import { parseCookies } from "nookies";
 import { getStudentById } from "@/services/students.service";
 import { StudentModel } from "@/models/student.model";
+import TopMenuBar from "@/components/TopMenuBar";
+import SideDektopMenuBar from "@/components/SideDektopMenuBar";
 
 interface PageProps {
   user: any;
@@ -33,11 +34,24 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 const Index: React.FC<PageProps> = ({ user }) => {
+  const [screenWidth, setScreenWidth] = React.useState<number>(0);
+
+  React.useEffect(() => {
+    const updateScreenWidth = () => {
+      setScreenWidth(window.innerWidth);
+    };
+    updateScreenWidth();
+    window.addEventListener("resize", updateScreenWidth);
+    return () => {
+      window.removeEventListener("resize", updateScreenWidth);
+    };
+  }, []);
   const userFromMap = StudentModel.newUserFromMap(user);
   return (
-    <div className="flex flex-row items-center md:h-screen md:w-screen">
-      <SideMenuBar />
-      <div className="flex flex-col mx-auto md:w-1/2">
+    <div className="flex flex-col md:flex-row items-center md:h-screen md:w-screen">
+      {screenWidth < 768 && <TopMenuBar />}
+      {screenWidth > 768 && <SideDektopMenuBar />}
+      <div className="flex flex-col mt-24 md:mt-0 mx-auto md:w-1/2">
         <Header
           title={`Editar o aluno ${userFromMap.name}`}
           description={"Confira os dados abaixo"}

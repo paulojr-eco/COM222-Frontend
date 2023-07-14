@@ -30,7 +30,7 @@ const ChangeProfilePanel: React.FC = () => {
       className="rounded-b-xl shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]"
     >
       <div className="flex flex-row px-14 py-8 place-content-evenly">
-        <div className="flex flex-col place-content-start gap-y-4">
+        <div className="flex flex-col place-content-start">
           <Typography> Avatar Atual: </Typography>
           <Image
             className="h-auto w-52"
@@ -40,7 +40,7 @@ const ChangeProfilePanel: React.FC = () => {
         </div>
         <div className="flex flex-col place-content-start gap-y-4">
           <Typography> Escolha o avatar desejado: </Typography>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-x-2 gap-y-2">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-2">
             {AvatarData.map((avatar) => (
               <Image
                 key={avatar.key}
@@ -56,14 +56,13 @@ const ChangeProfilePanel: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 p-6 md:p-14 md:pt-0 gap-x-6 gap-y-6 ">
+      <div className="grid grid-cols-1 md:grid-cols-2 p-6 md:pb-12 md:px-12  gap-x-6 gap-y-6 ">
         <TextField
           label="Nome"
           variant="outlined"
           required
           onKeyDown={(e) => {
             if (e.key === "Enter") {
-              //handleLogin();
             }
           }}
           onChange={(e) => setProfile({ ...profile, nome: e.target.value })}
@@ -74,7 +73,6 @@ const ChangeProfilePanel: React.FC = () => {
           required
           onKeyDown={(e) => {
             if (e.key === "Enter") {
-              //handleLogin();
             }
           }}
           onChange={(e) => setProfile({ ...profile, email: e.target.value })}
@@ -88,7 +86,6 @@ const ChangeProfilePanel: React.FC = () => {
             type="password"
             onKeyDown={(e) => {
               if (e.key === "Enter") {
-                //handleLogin();
               }
             }}
             onChange={(e) =>
@@ -102,7 +99,6 @@ const ChangeProfilePanel: React.FC = () => {
             type="password"
             onKeyDown={(e) => {
               if (e.key === "Enter") {
-                //handleLogin();
               }
             }}
             onChange={(e) =>
@@ -117,7 +113,6 @@ const ChangeProfilePanel: React.FC = () => {
             type="password"
             onKeyDown={(e) => {
               if (e.key === "Enter") {
-                //handleLogin();
               }
             }}
             onChange={(e) =>
@@ -139,7 +134,7 @@ const ChangeProfilePanel: React.FC = () => {
       <AlertDialog
         open={openAlertDialog}
         title={"Algo deu errado..."}
-        text={"Erro ao fazer Login. Tente Novamente."}
+        text={"Erro ao editar Perfil. Tente Novamente."}
         onClose={handleDismissDialog}
       />
     </Box>

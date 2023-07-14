@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 
 const baseUrl = process.env.BASE_URL || "http://localhost:3333/api";
 
@@ -7,7 +7,9 @@ const api = axios.create({
 });
 
 api.interceptors.response.use(
-  (response) => response,
+  (response: AxiosResponse) => {
+    return response;
+  },
   (error: AxiosError) => {
     const { response } = error;
     if (response?.status === 401 || response?.status === 400) {
@@ -15,6 +17,7 @@ api.interceptors.response.use(
         data: { redirect: true },
       };
     }
+    return Promise.reject(error);
   }
 );
 

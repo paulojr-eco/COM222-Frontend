@@ -82,6 +82,7 @@ const CrudStudentWidget: React.FC<CrudStudentWidgetProps> = (
       >
         <TextField
           label="Nome"
+          id="name-input"
           variant="outlined"
           value={student.nome}
           required
@@ -92,6 +93,7 @@ const CrudStudentWidget: React.FC<CrudStudentWidgetProps> = (
 
         <TextField
           label="Email"
+          id="email-input"
           variant="outlined"
           value={student.email}
           required

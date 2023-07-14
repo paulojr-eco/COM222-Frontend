@@ -44,13 +44,15 @@ const MenuDropDown: React.FC<MenuDropDownProps> = ({
   };
 
   const handleEditUser = () => {
-    isStudent ? router.push(`/students/${userId}`) : router.push(`/employees/${userId}`);
+    isStudent
+      ? router.push(`/students/${userId}`)
+      : router.push(`/employees/${userId}`);
   };
 
   const handleDeleteUser = (isConfirmed: boolean) => {
     if (isConfirmed) {
       handleDelete(userId);
-      isStudent ? router.push('/students') : router.push('/employees');
+      isStudent ? router.push("/students") : router.push("/employees");
     }
     handleShowDialog();
   };
@@ -58,6 +60,7 @@ const MenuDropDown: React.FC<MenuDropDownProps> = ({
   return (
     <div>
       <ActionButton
+        id={userName}
         Icon={icon}
         handleClick={handleDropDownOpen}
         isLarge={isLarge}
@@ -73,9 +76,13 @@ const MenuDropDown: React.FC<MenuDropDownProps> = ({
         }}
         className="max-w-[8rem]"
       >
-        <MenuItem onClick={handleEditUser}>Editar</MenuItem>
+        <MenuItem id="edit-btn" onClick={handleEditUser}>
+          Editar
+        </MenuItem>
 
-        <MenuItem onClick={handleShowDialog}>Excluir</MenuItem>
+        <MenuItem id="delete-btn" onClick={handleShowDialog}>
+          Excluir
+        </MenuItem>
         <ConfirmDialog
           open={openDialog}
           isStudent={isStudent}

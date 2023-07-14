@@ -7,6 +7,7 @@ interface ActionButtonProps {
   color?: string;
   Icon: OverridableComponent<SvgIconTypeMap<{}, "svg">>;
   handleClick: Function;
+  id: String;
 }
 
 const ActionButton: React.FC<ActionButtonProps> = ({
@@ -14,10 +15,12 @@ const ActionButton: React.FC<ActionButtonProps> = ({
   isLarge = false,
   color = "blue",
   handleClick,
+  id,
 }) => {
   return (
     <Box sx={{ "& > :not(style)": { m: 1 } }}>
       <Fab
+        id={id.toString()}
         size={isLarge ? "large" : "small"}
         className={
           color == "blue"

@@ -43,8 +43,8 @@ export default function LoginTabPanel() {
     <Box bgcolor="background.paper" className="flex flex-col rounded-b-lg p-6">
       <div>
         <Tabs value={value} onChange={handleChange} centered={true}>
-          <Tab label="Login" {...a11yProps(0)} />
-          <Tab label="Sigin" {...a11yProps(1)} />
+          <Tab label="Login" {...a11yProps(0)} id="login-tab" />
+          <Tab label="SignUp" {...a11yProps(1)} id="signup-tab" />
         </Tabs>
       </div>
       <TabPanel value={value} index={0}>
