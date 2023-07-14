@@ -33,7 +33,7 @@ const StudentCard: React.FC<StudentCardProps> = ({ user }) => {
           height={200}
         />
       </div>
-      <div className="relative">
+      <div className="relative z-10">
         <div className="absolute -top-14 -right-2">
           <MenuDropDown
             icon={MoreVertIcon}
