@@ -46,7 +46,6 @@ export const createStudent = async (
   try {
     const cookies = parseCookies();
     const formData = convertStudentJsonToFormData(newStudent, avatar, false);
-    console.log(formData);
     const response = await api.post(`/alunos`, formData, {
       headers: {
         Authorization: `Bearer ${cookies.accessToken}`,
