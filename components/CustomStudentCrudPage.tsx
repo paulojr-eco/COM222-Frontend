@@ -34,11 +34,8 @@ const CustomStudentCrudPage: React.FC<CustomPageProps> = ({
   };
 
   return (
-    <div className="flex flex-col justify-center md:h-[90vh] md:w-[80vw]">
-      <Box
-        className="max-w-sm md:max-w-xs p-3 rounded-t-xl"
-        bgcolor="primary.main"
-      >
+    <div className="flex flex-col justify-center md:h-[90vh] w-[80vw]">
+      <Box className="md:max-w-xs p-3 rounded-t-xl" bgcolor="primary.main">
         <Typography className="text-center" variant="h2">
           {title}
         </Typography>
@@ -63,6 +60,7 @@ const CustomStudentCrudPage: React.FC<CustomPageProps> = ({
         {hasSearch && (
           <TextField
             className="max-w-xl w-full pb-4"
+            id="student-search-input"
             label={`Pesquisar ${title.toLowerCase()}...`}
             variant="outlined"
             onChange={(e) => setSearch(e.target.value)}
@@ -83,6 +81,7 @@ const CustomStudentCrudPage: React.FC<CustomPageProps> = ({
       </Box>
       <div className="fixed bottom-2 right-2 md:bottom-[4vh] md:right-[2vw]">
         <ActionButton
+          id="student-action-btn"
           Icon={AddIcon}
           isLarge={true}
           color="green"

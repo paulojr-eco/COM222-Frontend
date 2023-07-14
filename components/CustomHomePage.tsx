@@ -34,11 +34,8 @@ const CustomHomePage: React.FC<CustomPageProps> = ({ title }) => {
   const theme = useTheme();
 
   return (
-    <div className="flex flex-col justify-center md:h-[90vh] md:w-[80vw]">
-      <Box
-        className="max-w-sm md:max-w-xs p-3 rounded-t-xl"
-        bgcolor="primary.main"
-      >
+    <div className="flex flex-col justify-center md:h-[90vh] w-[80vw]">
+      <Box className="md:max-w-xs p-3 rounded-t-xl" bgcolor="primary.main">
         <Typography className="text-center" variant="h2">
           {title}
         </Typography>
@@ -61,12 +58,13 @@ const CustomHomePage: React.FC<CustomPageProps> = ({ title }) => {
         bgcolor="background.paper"
       >
         <iframe
-          className="w-[100%] h-[100%]"
+          className="w-[100%] h-[90vh] md:h-[100%]"
           src="https://calendar.google.com/calendar/embed?src=trabalho.com222%40gmail.com&ctz=America%2FSao_Paulo"
         ></iframe>
       </Box>
       <div className="fixed bottom-2 right-2 md:bottom-[4vh] md:right-[2vw]">
         <ActionButton
+          id="home-action-btn"
           Icon={MoreVertIcon}
           isLarge={true}
           color="blue"
@@ -92,12 +90,14 @@ const CustomHomePage: React.FC<CustomPageProps> = ({ title }) => {
               label="Título"
               variant="outlined"
               required
+              id="title-input"
               onKeyDown={(e) => {}}
               onChange={(e) => setCustomTitle(e.target.value)}
             />
             <TextField
               label="Link"
               variant="outlined"
+              id="link-input"
               required
               onKeyDown={(e) => {}}
               onChange={(e) => setCustomLink(e.target.value)}
@@ -109,6 +109,7 @@ const CustomHomePage: React.FC<CustomPageProps> = ({ title }) => {
             <Button
               color="error"
               variant="contained"
+              id="cancel-btn"
               onClick={() => handleClose()}
             >
               Cancelar
@@ -117,6 +118,7 @@ const CustomHomePage: React.FC<CustomPageProps> = ({ title }) => {
               variant="contained"
               onClick={() => handleClose()}
               color="primary"
+              id="confirm-btn"
               autoFocus
             >
               Confirmar

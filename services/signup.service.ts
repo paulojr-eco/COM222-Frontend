@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from "./api.service";
 
 export const signUpUser = async (newUser: {
   email: string;
@@ -6,7 +6,7 @@ export const signUpUser = async (newUser: {
   passwordConfirmation: string;
 }) => {
   try {
-    const response = await axios.post(`/sign-up`, newUser);
+    const response = await api.post(`/sign-up`, newUser);
     return true;
   } catch (error) {
     console.error(error);

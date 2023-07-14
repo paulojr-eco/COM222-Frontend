@@ -6,9 +6,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { setCookie, parseCookies } from "nookies";
 import logoutIcon from "../assets/images/logout-icon.png";
-import { DarkModeSwitch } from "react-toggle-dark-mode";
 
-const SideMenuBar: React.FC = () => {
+const SideDektopMenuBar: React.FC = () => {
   const [expand, setExpand] = React.useState(false);
   const [isDarkMode, setDarkMode] = React.useState(false);
 
@@ -52,7 +51,11 @@ const SideMenuBar: React.FC = () => {
     >
       <div className="flex flex-col">
         <div className="flex flex-row py-2 items-center place-content-between gap-x-1.5">
-          <Link href={SchoolInfo.path} className="w-[100%] no-underline">
+          <Link
+            href={SchoolInfo.path}
+            className="w-[100%] no-underline"
+            id="school-link"
+          >
             <div className={expand ? "pl-6" : "pl-5"}>
               <div className="flex flex-row items-center h-14 text-white gap-x-4">
                 <Image
@@ -70,6 +73,7 @@ const SideMenuBar: React.FC = () => {
           </Link>
           <div className="pr-6">
             <Fab
+              id="expand-btn"
               className={"bg-gradient-to-br from-sky-600 to-violet-600 h-4 w-9"}
               aria-label="expand"
               onClick={(e) => {
@@ -90,6 +94,7 @@ const SideMenuBar: React.FC = () => {
               <li className="list-none hover:bg-indigo-500" key={element.title}>
                 <Link
                   href={element.path}
+                  id={element.title}
                   className="flex flex-row items-center h-14 no-underline text-white gap-x-4"
                 >
                   <div className={expand ? "pl-6" : "pl-[30%]"}>
@@ -116,6 +121,7 @@ const SideMenuBar: React.FC = () => {
         <div className="hover:bg-indigo-500">
           <Link
             href={"/login"}
+            id="logout-btn"
             className="flex flex-row items-center h-14 no-underline text-white gap-x-4"
           >
             <div className={expand ? "pl-6" : "pl-[30%]"}>
@@ -133,32 +139,11 @@ const SideMenuBar: React.FC = () => {
             </div>
           </Link>
         </div>
-        <div
-          className="cursor-pointer hover:bg-indigo-500"
-          onClick={(e) => toggleDarkMode(!isDarkMode)}
-        >
-          <div className={expand ? "pl-6" : "pl-[30%]"}>
-            <div className="flex flex-row items-center h-14 no-underline text-white gap-x-4">
-              <DarkModeSwitch
-                checked={isDarkMode}
-                onChange={() => {}}
-                size={30}
-              />
-              {expand && (
-                <Typography
-                  noWrap
-                  className="overflow-hidden text-ellipsis pr-6 w-44"
-                >
-                  Tema
-                </Typography>
-              )}
-            </div>
-          </div>
-        </div>
         {SidebarFixedData.map((element) => (
           <div className="hover:bg-indigo-500" key={element.title}>
             <Link
               href={element.path}
+              id={element.title}
               className="flex flex-row items-center h-14 no-underline text-white gap-x-4"
             >
               <div className={expand ? "pl-6" : "pl-[30%]"}>
@@ -182,4 +167,4 @@ const SideMenuBar: React.FC = () => {
   );
 };
 
-export default SideMenuBar;
+export default SideDektopMenuBar;

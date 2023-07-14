@@ -34,7 +34,7 @@ const AlertDialog: React.FC<AlertDialogProps> = ({
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={onClose} autoFocus>
+          <Button id="confirm-btn" onClick={onClose} autoFocus>
             Fechar
           </Button>
         </DialogActions>

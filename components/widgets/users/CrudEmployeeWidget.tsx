@@ -83,6 +83,7 @@ const CrudEmployeeWidget: React.FC<CrudEmployeeWidgetProps> = (
       >
         <TextField
           label="Nome"
+          id="name-input"
           variant="outlined"
           value={employee.nome}
           required
@@ -93,6 +94,7 @@ const CrudEmployeeWidget: React.FC<CrudEmployeeWidgetProps> = (
 
         <TextField
           label="Email"
+          id="email-input"
           variant="outlined"
           value={employee.email}
           required
@@ -103,6 +105,7 @@ const CrudEmployeeWidget: React.FC<CrudEmployeeWidgetProps> = (
 
         <TextField
           label="Registro"
+          id="register-input"
           variant="outlined"
           disabled={isEdit ? true : false}
           InputProps={{
@@ -133,8 +136,12 @@ const CrudEmployeeWidget: React.FC<CrudEmployeeWidgetProps> = (
               setEmployee({ ...employee, status: e.target.value });
             }}
           >
-            <MenuItem value={"ATIVO"}>Ativo</MenuItem>
-            <MenuItem value={"INATIVO"}>Inativo</MenuItem>
+            <MenuItem id="active-select" value={"ATIVO"}>
+              Ativo
+            </MenuItem>
+            <MenuItem id="inactive-select" value={"INATIVO"}>
+              Inativo
+            </MenuItem>
           </Select>
         </FormControl>
 
@@ -152,10 +159,18 @@ const CrudEmployeeWidget: React.FC<CrudEmployeeWidgetProps> = (
               setEmployee({ ...employee, cargo: e.target.value });
             }}
           >
-            <MenuItem value={"DIRECAO"}>Direção</MenuItem>
-            <MenuItem value={"COORDENACAO"}>Coordenação</MenuItem>
-            <MenuItem value={"SECRETARIA"}>Secretaria</MenuItem>
-            <MenuItem value={"PROFESSOR"}>Professor</MenuItem>
+            <MenuItem id="direcao-select" value={"DIRECAO"}>
+              Direção
+            </MenuItem>
+            <MenuItem id="coordenacao-select" value={"COORDENACAO"}>
+              Coordenação
+            </MenuItem>
+            <MenuItem id="secretaria-select" value={"SECRETARIA"}>
+              Secretaria
+            </MenuItem>
+            <MenuItem id="professor-select" value={"PROFESSOR"}>
+              Professor
+            </MenuItem>
           </Select>
         </FormControl>
 
@@ -173,10 +188,18 @@ const CrudEmployeeWidget: React.FC<CrudEmployeeWidgetProps> = (
               setEmployee({ ...employee, escolaridade: e.target.value });
             }}
           >
-            <MenuItem value={"GRADUACAO"}>Graduação</MenuItem>
-            <MenuItem value={"POSGRADUACAO"}>Pós-Graduação</MenuItem>
-            <MenuItem value={"MESTRADO"}>Mestrado</MenuItem>
-            <MenuItem value={"DOUTORADO"}>Doutorado</MenuItem>
+            <MenuItem id="graduacao-select" value={"GRADUACAO"}>
+              Graduação
+            </MenuItem>
+            <MenuItem id="pos-graduacao-select" value={"POSGRADUACAO"}>
+              Pós-Graduação
+            </MenuItem>
+            <MenuItem id="mestrado-select" value={"MESTRADO"}>
+              Mestrado
+            </MenuItem>
+            <MenuItem id="doutorado-select" value={"DOUTORADO"}>
+              Doutorado
+            </MenuItem>
           </Select>
         </FormControl>
 
@@ -184,6 +207,7 @@ const CrudEmployeeWidget: React.FC<CrudEmployeeWidgetProps> = (
           label="RG"
           variant="outlined"
           value={employee.RG}
+          id="rg-input"
           InputProps={{
             inputComponent: InputMask as any,
             inputProps: {
@@ -199,6 +223,7 @@ const CrudEmployeeWidget: React.FC<CrudEmployeeWidgetProps> = (
         <TextField
           label="CPF"
           variant="outlined"
+          id="cpf-input"
           value={employee.CPF}
           InputProps={{
             inputComponent: InputMask as any,
@@ -262,15 +287,22 @@ const CrudEmployeeWidget: React.FC<CrudEmployeeWidgetProps> = (
               setEmployee({ ...employee, sexo: e.target.value });
             }}
           >
-            <MenuItem value={"FEMININO"}>Feminino</MenuItem>
-            <MenuItem value={"MASCULINO"}>Masculino</MenuItem>
-            <MenuItem value={"NAODEFINIDO"}>N/A</MenuItem>
+            <MenuItem id="feminino-select" value={"FEMININO"}>
+              Feminino
+            </MenuItem>
+            <MenuItem id="masculino-select" value={"MASCULINO"}>
+              Masculino
+            </MenuItem>
+            <MenuItem id="nao-definido-select" value={"NAODEFINIDO"}>
+              N/A
+            </MenuItem>
           </Select>
         </FormControl>
 
         <TextField
           label="Endereço"
           variant="outlined"
+          id="address-input"
           value={employee.endereco}
           required
           onChange={(e) => {
@@ -292,9 +324,15 @@ const CrudEmployeeWidget: React.FC<CrudEmployeeWidgetProps> = (
               setEmployee({ ...employee, vinculo: e.target.value });
             }}
           >
-            <MenuItem value={"CONTRATADO"}>Contratado</MenuItem>
-            <MenuItem value={"CONCURSADO"}>Concursado</MenuItem>
-            <MenuItem value={"SUBSTITUTO"}>Substituto</MenuItem>
+            <MenuItem id="contratado-select" value={"CONTRATADO"}>
+              Contratado
+            </MenuItem>
+            <MenuItem id="concursado-select" value={"CONCURSADO"}>
+              Concursado
+            </MenuItem>
+            <MenuItem id="substituo-select" value={"SUBSTITUTO"}>
+              Substituto
+            </MenuItem>
           </Select>
         </FormControl>
 
@@ -310,6 +348,7 @@ const CrudEmployeeWidget: React.FC<CrudEmployeeWidgetProps> = (
                 <input type="file" ref={ref} {...getInputProps()} />
                 <TextField
                   fullWidth
+                  id="file-input"
                   label={avatar === undefined ? "Foto" : ""}
                   inputRef={inputRef}
                   variant="outlined"
@@ -335,6 +374,7 @@ const CrudEmployeeWidget: React.FC<CrudEmployeeWidgetProps> = (
           variant="contained"
           color="primary"
           size="large"
+          id="submit-btn"
           onClick={isEdit ? handleEditEmployee : handleCreateEmployee}
         >
           {isEdit ? "Editar Funcionário" : "Criar Funcionário"}

@@ -2,9 +2,10 @@ import * as React from "react";
 import CustomEmployeeCrudPage from "../../components/CustomEmployeeCrudPage";
 import { GetServerSideProps } from "next";
 import { parseCookies } from "nookies";
-import SideMenuBar from "@/components/SideMenuBar";
 import { getAllEmployees } from "@/services/employees.service";
 import { EmployeeModel } from "@/models/employee.model";
+import TopMenuBar from "@/components/TopMenuBar";
+import SideDektopMenuBar from "@/components/SideDektopMenuBar";
 
 interface PageProps {
   users: any;
@@ -29,13 +30,27 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 const Index: React.FC<PageProps> = ({ users }) => {
+  const [screenWidth, setScreenWidth] = React.useState<number>(0);
+
+  React.useEffect(() => {
+    const updateScreenWidth = () => {
+      setScreenWidth(window.innerWidth);
+    };
+    updateScreenWidth();
+    window.addEventListener("resize", updateScreenWidth);
+    return () => {
+      window.removeEventListener("resize", updateScreenWidth);
+    };
+  }, []);
+
   const listUsers = users.map((user: Map<string, any>) =>
     EmployeeModel.newUserFromMap(user)
   );
   return (
-    <div className="flex flex-row items-center md:h-screen md:w-screen">
-      <SideMenuBar />
-      <div className="mx-auto">
+    <div className="flex flex-col md:flex-row items-center md:h-screen md:w-screen">
+      {screenWidth < 768 && <TopMenuBar />}
+      {screenWidth > 768 && <SideDektopMenuBar />}
+      <div className="mt-24 md:mx-auto md:mt-0">
         <CustomEmployeeCrudPage
           title={"Funcionários"}
           crudName="employees"
