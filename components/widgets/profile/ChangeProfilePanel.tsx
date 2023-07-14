@@ -33,7 +33,7 @@ const ChangeProfilePanel: React.FC = () => {
         <div className="flex flex-col place-content-start">
           <Typography> Avatar Atual: </Typography>
           <Image
-            className="h-auto w-52"
+            className="h-auto w-32 md:w-52"
             src={currentAvatar}
             alt="Avatar Atual"
           />
@@ -44,7 +44,7 @@ const ChangeProfilePanel: React.FC = () => {
             {AvatarData.map((avatar) => (
               <Image
                 key={avatar.key}
-                className="h-auto w-24"
+                className="h-auto w-14 md:w-24"
                 src={avatar.icon}
                 alt="Avatar Atual"
                 onClick={() => {

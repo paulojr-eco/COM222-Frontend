@@ -47,7 +47,7 @@ As tecnologias utilizadas no projeto foram:
 
 # :computer_mouse: Instalação
 
-Para usar este projeto, primeiro você precisa de Node.JS, React.JS, e Next.JS instalados:
+Para usar este projeto, primeiro você precisa de Node.JS (é importante utilizar pelo menos a versão LTS => 18.16), React.JS, e Next.JS instalados:
 
 ```bash
 # Clonar o repositório
