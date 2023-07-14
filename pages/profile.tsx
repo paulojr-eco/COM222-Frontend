@@ -1,10 +1,10 @@
 import * as React from "react";
-import createImage from "../../assets/images/create-resource.png";
+import createImage from "../assets/images/create-resource.png";
 import Header from "@/components/Header";
-import CreateStudentWidget from "@/components/widgets/users/CrudStudentWidget";
 import SideMenuBar from "@/components/SideMenuBar";
 import checkAuth from "@/utility/checkAuth";
 import { GetServerSideProps } from "next";
+import ChangeProfilePanel from "@/components/widgets/profile/ChangeProfilePanel";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   return checkAuth(context);
@@ -16,11 +16,11 @@ export default function index() {
       <SideMenuBar />
       <div className="flex flex-col mx-auto md:w-1/2">
         <Header
-          title={"Cadastrar novo Aluno"}
+          title={"Personalize sua Conta"}
           description={"Preencha os dados abaixo"}
           imagePath={createImage}
         />
-        <CreateStudentWidget />
+        <ChangeProfilePanel />
       </div>
     </div>
   );

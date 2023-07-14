@@ -1,6 +1,8 @@
-import axios from "axios";
-import { baseUrl } from "./base.service";
-import { RequestStudentInterface } from "@/models/interfaces/req.student.interface";
+import api from "./api.service";
+import {
+  RequestStudentInterface,
+  convertStudentJsonToFormData,
+} from "@/models/interfaces/req.student.interface";
 import { parseCookies } from "nookies";
 import { UUID } from "crypto";
 
@@ -8,7 +10,7 @@ export const getAllStudents = async (
   accessToken: string
 ): Promise<Map<string, any> | null> => {
   try {
-    const response = await axios.get(`${baseUrl}/alunos`, {
+    const response = await api.get(`/alunos`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
@@ -25,7 +27,7 @@ export const getStudentById = async (
   userId: string
 ): Promise<Map<string, any> | null> => {
   try {
-    const response = await axios.get(`${baseUrl}/alunos/${userId}`, {
+    const response = await api.get(`/alunos/${userId}`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
@@ -37,10 +39,15 @@ export const getStudentById = async (
   }
 };
 
-export const createStudent = async (newStudent: RequestStudentInterface) => {
+export const createStudent = async (
+  newStudent: RequestStudentInterface,
+  avatar: File
+) => {
   try {
     const cookies = parseCookies();
-    const response = await axios.post(`${baseUrl}/alunos`, newStudent, {
+    const formData = convertStudentJsonToFormData(newStudent, avatar, false);
+    console.log(formData);
+    const response = await api.post(`/alunos`, formData, {
       headers: {
         Authorization: `Bearer ${cookies.accessToken}`,
       },
@@ -55,7 +62,7 @@ export const createStudent = async (newStudent: RequestStudentInterface) => {
 export const deleteStudent = async (userId: UUID) => {
   try {
     const cookies = parseCookies();
-    const response = await axios.delete(`${baseUrl}/alunos/${userId}`, {
+    const response = await api.delete(`/alunos/${userId}`, {
       headers: {
         Authorization: `Bearer ${cookies.accessToken}`,
       },
@@ -67,10 +74,15 @@ export const deleteStudent = async (userId: UUID) => {
   }
 };
 
-export const editStudent = async (userId: UUID, student: RequestStudentInterface) => {
+export const editStudent = async (
+  userId: UUID,
+  student: RequestStudentInterface,
+  avatar: File
+) => {
   try {
     const cookies = parseCookies();
-    const response = await axios.put(`${baseUrl}/alunos/${userId}`, student, {
+    const formData = convertStudentJsonToFormData(student, avatar, true);
+    const response = await api.put(`/alunos/${userId}`, formData, {
       headers: {
         Authorization: `Bearer ${cookies.accessToken}`,
       },

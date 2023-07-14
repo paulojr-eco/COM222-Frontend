@@ -8,4 +8,5 @@ export interface StudentInterface extends UserInterface {
   birthDate: string;
   gender: string;
   address: string;
+  file: string;
 }

@@ -1,5 +1,5 @@
 import * as React from "react";
-import CustomPage from "../../components/CustomCrudPage";
+import CustomStudentCrudPage from "../../components/CustomStudentCrudPage";
 import { StudentModel } from "@/models/student.model";
 import { getAllStudents } from "@/services/students.service";
 import { GetServerSideProps } from "next";
@@ -13,6 +13,13 @@ interface PageProps {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const cookies = parseCookies(context);
   const users = await getAllStudents(cookies.accessToken);
+  if (typeof users === "object" && users !== null) {
+    for (const [key] of Object.entries(users)) {
+      if (key === "redirect") {
+        return { redirect: { destination: "/login", permanent: false } };
+      }
+    }
+  }
   return {
     props: {
       users,
@@ -28,7 +35,7 @@ const Index: React.FC<PageProps> = ({ users }) => {
     <div className="flex flex-row items-center md:h-screen md:w-screen">
       <SideMenuBar />
       <div className="mx-auto">
-        <CustomPage
+        <CustomStudentCrudPage
           title={"Alunos"}
           crudName="students"
           hasSearch={true}

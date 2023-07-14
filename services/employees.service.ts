@@ -1,14 +1,16 @@
-import axios from "axios";
-import { baseUrl } from "./base.service";
+import api from "./api.service";
 import { parseCookies } from "nookies";
 import { UUID } from "crypto";
-import { RequestEmployeeInterface } from "@/models/interfaces/req.employee.interface";
+import {
+  RequestEmployeeInterface,
+  convertJsonToFormData,
+} from "@/models/interfaces/req.employee.interface";
 
 export const getAllEmployees = async (
-  accessToken: string
+  accessToken?: string
 ): Promise<Map<string, any> | null> => {
   try {
-    const response = await axios.get(`${baseUrl}/funcionarios`, {
+    const response = await api.get(`/funcionarios`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
@@ -25,7 +27,7 @@ export const getEmployeeById = async (
   userId: string
 ): Promise<Map<string, any> | null> => {
   try {
-    const response = await axios.get(`${baseUrl}/funcionarios/${userId}`, {
+    const response = await api.get(`/funcionarios/${userId}`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
@@ -37,10 +39,14 @@ export const getEmployeeById = async (
   }
 };
 
-export const createEmployee = async (newEmployee: RequestEmployeeInterface) => {
+export const createEmployee = async (
+  newEmployee: RequestEmployeeInterface,
+  avatar: File
+) => {
   try {
     const cookies = parseCookies();
-    const response = await axios.post(`${baseUrl}/funcionarios`, newEmployee, {
+    const formData = convertJsonToFormData(newEmployee, avatar, false);
+    const response = await api.post(`/funcionarios`, formData, {
       headers: {
         Authorization: `Bearer ${cookies.accessToken}`,
       },
@@ -55,7 +61,7 @@ export const createEmployee = async (newEmployee: RequestEmployeeInterface) => {
 export const deleteEmployee = async (userId: UUID) => {
   try {
     const cookies = parseCookies();
-    const response = await axios.delete(`${baseUrl}/funcionarios/${userId}`, {
+    const response = await api.delete(`/funcionarios/${userId}`, {
       headers: {
         Authorization: `Bearer ${cookies.accessToken}`,
       },
@@ -67,10 +73,15 @@ export const deleteEmployee = async (userId: UUID) => {
   }
 };
 
-export const editEmployee = async (userId: UUID, employee: RequestEmployeeInterface) => {
+export const editEmployee = async (
+  userId: UUID,
+  employee: RequestEmployeeInterface,
+  avatar: File
+) => {
   try {
     const cookies = parseCookies();
-    const response = await axios.put(`${baseUrl}/funcionarios/${userId}`, employee, {
+    const formData = convertJsonToFormData(employee, avatar, true);
+    const response = await api.put(`/funcionarios/${userId}`, formData, {
       headers: {
         Authorization: `Bearer ${cookies.accessToken}`,
       },

@@ -31,13 +31,8 @@ export const SidebarData = [
 
 export const SidebarFixedData = [
   {
-    title: "Sair",
-    icon: logoutIcon,
-    path: "/login",
-  },
-  {
     title: "Nome Sobrenome",
-    path: "/home",
+    path: "/profile",
     icon: defaultAvatar,
   },
 ];

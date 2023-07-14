@@ -9,4 +9,5 @@ export interface EmployeeInterface extends UserInterface {
   gender: string;
   schooling: string;
   address: string;
+  file: string;
 }
