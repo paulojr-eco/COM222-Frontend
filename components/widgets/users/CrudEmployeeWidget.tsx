@@ -20,6 +20,7 @@ import AlertDialog from "@/components/AlertDialog";
 import { useRouter } from "next/router";
 import { EmployeeModel } from "@/models/employee.model";
 import { createEmployee, editEmployee } from "@/services/employees.service";
+import base64ToPngFile from "@/utility/base64ToFile";
 
 interface CrudEmployeeWidgetProps {
   user?: EmployeeModel;
@@ -28,14 +29,14 @@ interface CrudEmployeeWidgetProps {
 
 let hasSuccsess = false;
 
-const CrudEmployeeWidget: React.FC<CrudEmployeeWidgetProps> = ({
-  user,
-  isEdit = false,
-}) => {
+const CrudEmployeeWidget: React.FC<CrudEmployeeWidgetProps> = (
+  { user, isEdit = false },
+  ref
+) => {
   const router = useRouter();
   const [employee, setEmployee] = React.useState({
-    registro: 123456,
-    status: "ATIVO",
+    registro: user ? user.registration : undefined,
+    status: user ? user.status : "",
     nome: user ? user.name : "",
     email: user ? user.email : "",
     RG: user ? user.RG : "",
@@ -47,10 +48,13 @@ const CrudEmployeeWidget: React.FC<CrudEmployeeWidgetProps> = ({
     sexo: user ? user.gender : "",
     endereco: user ? user.address : "",
     vinculo: user ? user.bond : "",
-    //foto: "",
   });
 
   const [openAlertDialog, setOpenAlertDialog] = React.useState(false);
+
+  const [avatar, setAvatar] = React.useState<File | undefined>(
+    user?.file !== undefined ? base64ToPngFile(user.file, "Avatar") : undefined
+  );
 
   const handleDismissDialog = () => {
     setOpenAlertDialog(false);
@@ -60,14 +64,16 @@ const CrudEmployeeWidget: React.FC<CrudEmployeeWidgetProps> = ({
   };
 
   const handleCreateEmployee = async () => {
-    hasSuccsess = await createEmployee(employee);
+    hasSuccsess = await createEmployee(employee, avatar!);
     setOpenAlertDialog(true);
   };
 
   const handleEditEmployee = async () => {
-    hasSuccsess = await editEmployee(user!.id, employee);
+    hasSuccsess = await editEmployee(user!.id, employee, avatar!);
     setOpenAlertDialog(true);
   };
+
+  const inputRef = React.useRef();
 
   return (
     <>
@@ -94,6 +100,43 @@ const CrudEmployeeWidget: React.FC<CrudEmployeeWidgetProps> = ({
             setEmployee({ ...employee, email: e.target.value });
           }}
         />
+
+        <TextField
+          label="Registro"
+          variant="outlined"
+          disabled={isEdit ? true : false}
+          InputProps={{
+            inputComponent: InputMask as any,
+            inputProps: {
+              mask: "99999",
+              maskChar: null,
+            },
+          }}
+          required
+          value={employee.registro?.toString()}
+          onChange={(e) => {
+            setEmployee({ ...employee, registro: Number(e.target.value) });
+          }}
+        />
+
+        <FormControl fullWidth>
+          <InputLabel required id="select-role-label">
+            Status
+          </InputLabel>
+          <Select
+            fullWidth
+            labelId="select-role-label"
+            id="select-role"
+            value={employee.status}
+            label="Status"
+            onChange={(e) => {
+              setEmployee({ ...employee, status: e.target.value });
+            }}
+          >
+            <MenuItem value={"ATIVO"}>Ativo</MenuItem>
+            <MenuItem value={"INATIVO"}>Inativo</MenuItem>
+          </Select>
+        </FormControl>
 
         <FormControl fullWidth>
           <InputLabel required id="select-role-label">
@@ -256,19 +299,23 @@ const CrudEmployeeWidget: React.FC<CrudEmployeeWidgetProps> = ({
         </FormControl>
 
         <Dropzone
-          onDrop={
-            (acceptedFiles) => console.log(acceptedFiles) //setEmployee({ ...employee, foto: "acceptedFiles" })
-          }
+          onDrop={(acceptedFiles) => {
+            const fileInput = acceptedFiles[0];
+            setAvatar(fileInput);
+          }}
         >
           {({ getRootProps, getInputProps }) => (
-            <section>
+            <div>
               <div {...getRootProps()}>
-                <input {...getInputProps()} />
+                <input type="file" ref={ref} {...getInputProps()} />
                 <TextField
                   fullWidth
-                  label="Foto"
+                  label={avatar === undefined ? "Foto" : ""}
+                  inputRef={inputRef}
                   variant="outlined"
+                  disabled
                   required
+                  value={avatar !== undefined ? avatar.name : ""}
                   helperText="Os formatos permitidos são: png, jpeg e gif"
                   InputProps={{
                     endAdornment: (
@@ -279,7 +326,7 @@ const CrudEmployeeWidget: React.FC<CrudEmployeeWidgetProps> = ({
                   }}
                 />
               </div>
-            </section>
+            </div>
           )}
         </Dropzone>
 

@@ -1,5 +1,8 @@
 import api from "./api.service";
-import { RequestStudentInterface } from "@/models/interfaces/req.student.interface";
+import {
+  RequestStudentInterface,
+  convertStudentJsonToFormData,
+} from "@/models/interfaces/req.student.interface";
 import { parseCookies } from "nookies";
 import { UUID } from "crypto";
 
@@ -36,10 +39,15 @@ export const getStudentById = async (
   }
 };
 
-export const createStudent = async (newStudent: RequestStudentInterface) => {
+export const createStudent = async (
+  newStudent: RequestStudentInterface,
+  avatar: File
+) => {
   try {
     const cookies = parseCookies();
-    const response = await api.post(`/alunos`, newStudent, {
+    const formData = convertStudentJsonToFormData(newStudent, avatar, false);
+    console.log(formData);
+    const response = await api.post(`/alunos`, formData, {
       headers: {
         Authorization: `Bearer ${cookies.accessToken}`,
       },
@@ -68,11 +76,13 @@ export const deleteStudent = async (userId: UUID) => {
 
 export const editStudent = async (
   userId: UUID,
-  student: RequestStudentInterface
+  student: RequestStudentInterface,
+  avatar: File
 ) => {
   try {
     const cookies = parseCookies();
-    const response = await api.put(`/alunos/${userId}`, student, {
+    const formData = convertStudentJsonToFormData(student, avatar, true);
+    const response = await api.put(`/alunos/${userId}`, formData, {
       headers: {
         Authorization: `Bearer ${cookies.accessToken}`,
       },

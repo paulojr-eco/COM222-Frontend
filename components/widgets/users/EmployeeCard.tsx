@@ -1,25 +1,24 @@
 import * as React from "react";
 import { Box, Typography } from "@mui/material";
-import { StudentModel } from "@/models/student.model";
 import MarkunreadOutlinedIcon from "@mui/icons-material/MarkunreadOutlined";
-import CallOutlinedIcon from "@mui/icons-material/CallOutlined";
 import IconText from "@/components/IconText";
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
 import ReceiptIcon from "@mui/icons-material/Receipt";
 import Brightness1Icon from "@mui/icons-material/Brightness1";
 import Image from "next/image";
-import defaultAvatar from "../../../assets/images/default-avatar.png";
+import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import MenuDropDown from "@/components/MenuDropDown";
 import { deleteStudent } from "@/services/students.service";
 import { deleteEmployee } from "@/services/employees.service";
+import { EmployeeModel } from "@/models/employee.model";
 
-interface UserCardProps {
-  user: StudentModel;
+interface EmployeeCardProps {
+  user: EmployeeModel;
   key: string;
 }
 
-const UserCard: React.FC<UserCardProps> = ({ user }) => {
+const EmployeeCard: React.FC<EmployeeCardProps> = ({ user }) => {
   return (
     <Box
       className="flex flex-col gap-y-3 rounded-3xl p-6 max-w-xl"
@@ -28,8 +27,10 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
       <div className="relative mx-auto pr-24 pb-8">
         <Image
           className="w-24 h-auto absolute -top-14"
-          src={defaultAvatar}
+          src={`data:image/png;base64,${user.file}`}
           alt="Imagem de perfil do usuário"
+          width={300}
+          height={200}
         />
       </div>
       <div className="relative">
@@ -49,7 +50,7 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
         {user.name}
       </Typography>
       <IconText text={user.email} Icon={MarkunreadOutlinedIcon}></IconText>
-      <IconText text={user.phone} Icon={CallOutlinedIcon}></IconText>
+      <IconText text={user.CPF} Icon={AssignmentIndIcon}></IconText>
       <IconText
         text={user.registration.toString()}
         Icon={ReceiptIcon}
@@ -64,4 +65,4 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
   );
 };
 
-export default UserCard;
+export default EmployeeCard;

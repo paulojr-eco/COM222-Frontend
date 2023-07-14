@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Box, InputAdornment, TextField, Typography } from "@mui/material";
-import UserCard from "@/components/widgets/users/UserCard";
+import StudentCard from "@/components/widgets/users/StudentCard";
 import { StudentModel } from "@/models/student.model";
 import { Search } from "@mui/icons-material";
 import ActionButton from "./ActionButton";
@@ -14,7 +14,7 @@ interface CustomPageProps {
   users: Array<StudentModel>;
 }
 
-const CustomCrudPage: React.FC<CustomPageProps> = ({
+const CustomStudentCrudPage: React.FC<CustomPageProps> = ({
   title,
   hasSearch,
   users,
@@ -77,7 +77,7 @@ const CustomCrudPage: React.FC<CustomPageProps> = ({
         )}
         <div className="grid grid-cols-1 md:grid-cols-4 pt-12 gap-x-6 gap-y-14">
           {filteredUsers.map((user) => (
-            <UserCard key={user.id} user={user} />
+            <StudentCard key={user.id} user={user} />
           ))}
         </div>
       </Box>
@@ -93,4 +93,4 @@ const CustomCrudPage: React.FC<CustomPageProps> = ({
   );
 };
 
-export default CustomCrudPage;
+export default CustomStudentCrudPage;

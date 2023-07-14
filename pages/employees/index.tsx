@@ -1,5 +1,5 @@
 import * as React from "react";
-import CustomPage from "../../components/CustomCrudPage";
+import CustomEmployeeCrudPage from "../../components/CustomEmployeeCrudPage";
 import { GetServerSideProps } from "next";
 import { parseCookies } from "nookies";
 import SideMenuBar from "@/components/SideMenuBar";
@@ -36,7 +36,7 @@ const Index: React.FC<PageProps> = ({ users }) => {
     <div className="flex flex-row items-center md:h-screen md:w-screen">
       <SideMenuBar />
       <div className="mx-auto">
-        <CustomPage
+        <CustomEmployeeCrudPage
           title={"Funcionários"}
           crudName="employees"
           hasSearch={true}

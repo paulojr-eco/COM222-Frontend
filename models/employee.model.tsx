@@ -5,11 +5,9 @@ export class EmployeeModel {
   id: UUID;
   name: string;
   email: string;
-  phone: string;
   registration: number;
   role: string;
   status: string;
-  photo?: string;
   bond: string;
   admition: string;
   RG: string;
@@ -18,16 +16,15 @@ export class EmployeeModel {
   gender: string;
   schooling: string;
   address: string;
+  file: string;
 
   constructor({
     id,
     name,
     email,
-    phone,
     registration,
     role,
     status,
-    photo,
     bond,
     admition,
     RG,
@@ -36,15 +33,14 @@ export class EmployeeModel {
     gender,
     schooling,
     address,
+    file,
   }: EmployeeInterface) {
     this.id = id;
     this.name = name;
     this.email = email;
-    this.phone = phone;
     this.registration = registration;
     this.role = role;
     this.status = status;
-    this.photo = photo;
     this.bond = bond;
     this.admition = admition;
     this.RG = RG;
@@ -53,6 +49,7 @@ export class EmployeeModel {
     this.gender = gender;
     this.schooling = schooling;
     this.address = address;
+    this.file = file;
   }
 
   static newUserFromMap = (user: any): EmployeeModel => {
@@ -70,16 +67,15 @@ export class EmployeeModel {
       sexo,
       status,
       vinculo,
+      avatar,
     } = user.props;
     return new EmployeeModel({
       id: user._id,
       name: nome,
       email: email,
-      phone: "(35) 99999-9999",
       registration: registro,
       role: cargo,
       status: status,
-      photo: "profile.png",
       admition: admissao,
       schooling: escolaridade,
       RG: RG,
@@ -88,6 +84,7 @@ export class EmployeeModel {
       gender: sexo,
       address: endereco,
       bond: vinculo,
+      file: avatar,
     });
   };
 }

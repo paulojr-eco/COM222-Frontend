@@ -62,7 +62,7 @@ const CustomHomePage: React.FC<CustomPageProps> = ({ title }) => {
       >
         <iframe
           className="w-[100%] h-[100%]"
-          src="https://calendar.google.com/calendar/embed?src=paulojr.eco%40gmail.com&ctz=America%2FSao_Paulo"
+          src="https://calendar.google.com/calendar/embed?src=trabalho.com222%40gmail.com&ctz=America%2FSao_Paulo"
         ></iframe>
       </Box>
       <div className="fixed bottom-2 right-2 md:bottom-[4vh] md:right-[2vw]">

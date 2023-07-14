@@ -1,13 +1,11 @@
 import { Box, Typography, TextField, Button } from "@mui/material";
 import * as React from "react";
 import AlertDialog from "@/components/AlertDialog";
-import { useRouter } from "next/router";
 import defaultAvatar from "../../../assets/images/default-avatar.png";
 import { AvatarData } from "./AvatarData";
 import Image, { StaticImageData } from "next/image";
 
 const ChangeProfilePanel: React.FC = () => {
-  const router = useRouter();
   const [openAlertDialog, setOpenAlertDialog] = React.useState(false);
   const [currentAvatar, setCurrentAvatar] = React.useState(defaultAvatar);
   const [profile, setProfile] = React.useState({
@@ -23,7 +21,6 @@ const ChangeProfilePanel: React.FC = () => {
     setOpenAlertDialog(false);
   };
   const handleChangeAvatar = (avatar: StaticImageData) => {
-    console.log("Mudou");
     setCurrentAvatar(avatar);
   };
 

@@ -20,6 +20,7 @@ import { createStudent, editStudent } from "@/services/students.service";
 import AlertDialog from "@/components/AlertDialog";
 import { useRouter } from "next/router";
 import { StudentModel } from "@/models/student.model";
+import base64ToPngFile from "@/utility/base64ToFile";
 
 interface CrudStudentWidgetProps {
   user?: StudentModel;
@@ -28,13 +29,14 @@ interface CrudStudentWidgetProps {
 
 let hasSuccsess = false;
 
-const CrudStudentWidget: React.FC<CrudStudentWidgetProps> = ({
-  user,
-  isEdit = false,
-}) => {
+const CrudStudentWidget: React.FC<CrudStudentWidgetProps> = (
+  { user, isEdit = false },
+  ref
+) => {
   const router = useRouter();
+
   const [student, setStudent] = React.useState({
-    matricula: 2020004848,
+    matricula: user ? user.registration : undefined,
     status: "ATIVO",
     nome: user ? user.name : "",
     email: user ? user.email : "",
@@ -45,10 +47,15 @@ const CrudStudentWidget: React.FC<CrudStudentWidgetProps> = ({
     nascimento: user ? user.birthDate : "",
     sexo: user ? user.gender : "",
     endereco: user ? user.address : "",
-    //foto: "",
   });
 
   const [openAlertDialog, setOpenAlertDialog] = React.useState(false);
+
+  const [avatar, setAvatar] = React.useState<File | undefined>(
+    user?.file !== undefined ? base64ToPngFile(user.file, "Avatar") : undefined
+  );
+
+  const inputRef = React.useRef();
 
   const handleDismissDialog = () => {
     setOpenAlertDialog(false);
@@ -58,12 +65,12 @@ const CrudStudentWidget: React.FC<CrudStudentWidgetProps> = ({
   };
 
   const handleCreateStudent = async () => {
-    hasSuccsess = await createStudent(student);
+    hasSuccsess = await createStudent(student, avatar!);
     setOpenAlertDialog(true);
   };
 
   const handleEditStudent = async () => {
-    hasSuccsess = await editStudent(user!.id, student);
+    hasSuccsess = await editStudent(user!.id, student, avatar!);
     setOpenAlertDialog(true);
   };
 
@@ -90,6 +97,24 @@ const CrudStudentWidget: React.FC<CrudStudentWidgetProps> = ({
           required
           onChange={(e) => {
             setStudent({ ...student, email: e.target.value });
+          }}
+        />
+
+        <TextField
+          label="Matrícula"
+          variant="outlined"
+          disabled={isEdit ? true : false}
+          InputProps={{
+            inputComponent: InputMask as any,
+            inputProps: {
+              mask: "99999",
+              maskChar: null,
+            },
+          }}
+          required
+          value={student.matricula?.toString()}
+          onChange={(e) => {
+            setStudent({ ...student, matricula: Number(e.target.value) });
           }}
         />
 
@@ -203,19 +228,23 @@ const CrudStudentWidget: React.FC<CrudStudentWidgetProps> = ({
         />
 
         <Dropzone
-          onDrop={
-            (acceptedFiles) => console.log(acceptedFiles) //setStudent({ ...student, foto: "acceptedFiles" })
-          }
+          onDrop={(acceptedFiles) => {
+            const fileInput = acceptedFiles[0];
+            setAvatar(fileInput);
+          }}
         >
           {({ getRootProps, getInputProps }) => (
-            <section>
+            <div>
               <div {...getRootProps()}>
-                <input {...getInputProps()} />
+                <input type="file" ref={ref} {...getInputProps()} />
                 <TextField
                   fullWidth
-                  label="Foto"
+                  label={avatar === undefined ? "Foto" : ""}
+                  inputRef={inputRef}
                   variant="outlined"
+                  disabled
                   required
+                  value={avatar !== undefined ? avatar.name : ""}
                   helperText="Os formatos permitidos são: png, jpeg e gif"
                   InputProps={{
                     endAdornment: (
@@ -226,7 +255,7 @@ const CrudStudentWidget: React.FC<CrudStudentWidgetProps> = ({
                   }}
                 />
               </div>
-            </section>
+            </div>
           )}
         </Dropzone>
 

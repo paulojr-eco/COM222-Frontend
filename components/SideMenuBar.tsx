@@ -5,14 +5,33 @@ import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrow
 import Image from "next/image";
 import Link from "next/link";
 import { setCookie, parseCookies } from "nookies";
+import logoutIcon from "../assets/images/logout-icon.png";
+import { DarkModeSwitch } from "react-toggle-dark-mode";
 
 const SideMenuBar: React.FC = () => {
   const [expand, setExpand] = React.useState(false);
+  const [isDarkMode, setDarkMode] = React.useState(false);
+
+  const toggleDarkMode = (checked: boolean) => {
+    setDarkMode(checked);
+    setCookie(null, "theme", !isDarkMode ? "dark" : "light", {
+      maxAge: 365 * 24 * 60 * 60,
+      path: "/",
+      secure: true,
+      sameSite: "strict",
+    });
+  };
 
   React.useEffect(() => {
     const cookieExpanded = parseCookies().expandedSideBar;
     const expandedSideBar = cookieExpanded === "true" ? true : false;
     setExpand(expandedSideBar);
+  }, []);
+
+  React.useEffect(() => {
+    const cookieTheme = parseCookies().theme;
+    const theme = cookieTheme === "dark" ? true : false;
+    setDarkMode(theme);
   }, []);
 
   const handleExpand = () => {
@@ -94,34 +113,70 @@ const SideMenuBar: React.FC = () => {
         </div>
       </div>
       <div>
-        <ul className="p-0">
-          {SidebarFixedData.map((element) => (
-            <li className="list-none hover:bg-indigo-500" key={element.title}>
-              <Link
-                href={element.path}
-                className="flex flex-row items-center h-14 no-underline text-white gap-x-4"
-              >
-                <div className={expand ? "pl-6" : "pl-[30%]"}>
-                  <div className="flex flex-row items-center h-14 no-underline text-white gap-x-4">
-                    <Image
-                      className="h-7 w-auto"
-                      src={element.icon}
-                      alt="Icon"
-                    />
-                    {expand && (
-                      <Typography
-                        noWrap
-                        className="overflow-hidden text-ellipsis pr-6 w-44"
-                      >
-                        {element.title}
-                      </Typography>
-                    )}
-                  </div>
+        <div className="hover:bg-indigo-500">
+          <Link
+            href={"/login"}
+            className="flex flex-row items-center h-14 no-underline text-white gap-x-4"
+          >
+            <div className={expand ? "pl-6" : "pl-[30%]"}>
+              <div className="flex flex-row items-center h-14 no-underline text-white gap-x-4">
+                <Image className="h-7 w-auto" src={logoutIcon} alt="Icon" />
+                {expand && (
+                  <Typography
+                    noWrap
+                    className="overflow-hidden text-ellipsis pr-6 w-44"
+                  >
+                    Sair
+                  </Typography>
+                )}
+              </div>
+            </div>
+          </Link>
+        </div>
+        <div
+          className="cursor-pointer hover:bg-indigo-500"
+          onClick={(e) => toggleDarkMode(!isDarkMode)}
+        >
+          <div className={expand ? "pl-6" : "pl-[30%]"}>
+            <div className="flex flex-row items-center h-14 no-underline text-white gap-x-4">
+              <DarkModeSwitch
+                checked={isDarkMode}
+                onChange={() => {}}
+                size={30}
+              />
+              {expand && (
+                <Typography
+                  noWrap
+                  className="overflow-hidden text-ellipsis pr-6 w-44"
+                >
+                  Tema
+                </Typography>
+              )}
+            </div>
+          </div>
+        </div>
+        {SidebarFixedData.map((element) => (
+          <div className="hover:bg-indigo-500" key={element.title}>
+            <Link
+              href={element.path}
+              className="flex flex-row items-center h-14 no-underline text-white gap-x-4"
+            >
+              <div className={expand ? "pl-6" : "pl-[30%]"}>
+                <div className="flex flex-row items-center h-14 no-underline text-white gap-x-4">
+                  <Image className="h-7 w-auto" src={element.icon} alt="Icon" />
+                  {expand && (
+                    <Typography
+                      noWrap
+                      className="overflow-hidden text-ellipsis pr-6 w-44"
+                    >
+                      {element.title}
+                    </Typography>
+                  )}
                 </div>
-              </Link>
-            </li>
-          ))}
-        </ul>
+              </div>
+            </Link>
+          </div>
+        ))}
       </div>
     </Box>
   );
