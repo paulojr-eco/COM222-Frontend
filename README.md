@@ -7,7 +7,8 @@
 <p align="center">
   <a href="#star-features">Features</a>&nbsp;&nbsp;|&nbsp;&nbsp;
   <a href="#keyboard-tecnologias">Tecnologias</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-  <a href="#computer_mouse-instalação">Instalação</a>
+  <a href="#computer_mouse-instalação">Instalação</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  <a href="#round_pushpin-rotas">Rotas</a>
 </p>
 
 
