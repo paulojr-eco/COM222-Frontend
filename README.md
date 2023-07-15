@@ -61,3 +61,17 @@ npm install
 
 # Iniciar a aplicação 
 npm run dev
+```
+# :round_pushpin: Rotas
+- /login: Página para realização de Sign In/Sign Up
+- /reset-password: Página com campo de inserção de e-mail para envio de e-mail de recuperação
+- /reset-password/confirmation: Página de confirmação do envio de recuperação
+- /reset-password/[token]: Rota para a página de redefinição de senha
+- /home: Página Inicial (contem o Cronograma como exemplo)
+- /employees: Rota para a página de visualização dos funcionários
+- /employees/create: Página para criação de funcionário
+- /employees/[id]: Interface de edição de um funcionário
+- /students: Rota para a página de visualização dos alunos
+- /students/create: Página para criação de aluno
+- /students/[id]: Interface de edição de um aluno
+- /profile: Rota para a página de edição do perfil do usuário
